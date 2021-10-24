@@ -2,29 +2,75 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rol;
 use App\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
+    //listar usuarios
+    public function list(){
+        $users = DB::table('usuarios')
 
-    //Formulario de usuarios
-    public function userform(){
-        return view('usuarios.userform');
+            ->join('rol', 'usuarios.rol_id', '=', 'rol.id_rol')
+            ->select('usuarios.*', 'rol.descripcion')
+            ->paginate(4);
+
+
+        return view('usuarios.list', compact('users'));
+
     }
+
+    // formulario
+    public function userform(){
+        $rol=Rol::all();
+
+        return view('usuarios.userform', compact('rol'));
+
+    }
+
     //Guardar Usuarios
     public function save(Request $request){
-
-        $validator=$this->validate($request,[
-            'nombre'=> 'required|string|max:255',
-            'email'=> 'required|string|max:255|email|unique:usuarios'
+        $validator = $this->validate($request, [
+            'nombre'=> 'required|string|max:100',
+            'email'=> 'required|string|max:100|email|unique:usuarios',
+            'rol'=> 'required'
         ]);
-
-        $userdata= request()->except('_token');
-        Usuario::insert($userdata);
-
+        Usuario::create([
+            'nombre'=>$validator['nombre'],
+            'email'=>$validator['email'],
+            'rol_id'=>$validator['rol']
+        ]);
 
         return back()->with('usuarioGuardado','Usuario Guardado');
     }
 
+        //eliminar usuarios
+        public
+        function delete($id)
+        {
+            Usuario::destroy($id);
+            return back()->with('usuarioEliminado', 'Usuario Eliminado');
+        }
+
+
+    //formulario para editar usuarios
+    public function editform($id){
+        $rol=Rol::all();
+        $usuario = Usuario::findOrfail($id);
+        return view ('usuarios.editform', compact('usuario', 'rol'));
+
+    }
+
+    //edicion usuarios
+    public function edit(Request $request,$id)
+    {
+
+        $dataUsuario = request()->except ((['_token','_method']));
+        Usuario::where('id', '=', $id)->update($dataUsuario);
+
+        return back()->with('usuarioModificado', 'Usuario Modificado');
+    }
 }

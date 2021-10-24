@@ -12,10 +12,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// ruta para listar
+Route::get('/', 'UserController@list');
 
-Route::get('/', function () {
-    return view('usuarios.listar');
-});
-
+//ruta para formulario de usuarios
 route::get('/form', 'UserController@userform');
+
+//ruta para guardar usuario
 route::post('/save', 'UserController@save')->name('save');
+
+
+
+//ruta para eliminar un usuario
+Route::delete('/delete/{id}', 'UserController@delete')->name ('delete');
+
+//ruta para editar usuarios
+Route::get('/editform/{id}', 'userController@editform')->name('editform');
+
+//edicion de usuarios
+Route::patch('/edit/{id}', 'userController@edit')->name('edit');
+
