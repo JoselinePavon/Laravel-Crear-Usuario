@@ -26,8 +26,8 @@
 
                         <!-- Formulario de registro de usuario -->
             <div class="card">
-                <form action="{{url('/save')}}" method="POST">
-                @csrf
+                <form action="{{url('/save')}}" method="POST"  enctype="multipart/form-data">
+                {{csrf_field()}}
 
                     <div class="card-header text-center">AGREGAR USUARIO</div>
 
@@ -43,9 +43,20 @@
                         </div>
 
                         <div class="row form-group">
+                            <label for="" class="col-2">Foto:</label>
+                            <div class="custom-file col-9">
+                                <input type="file" name="foto" class="custom-file-input" id="customFileLang" lang="es">
+                                <label class="custom-file-label text-center" for="customFileLang">Seleccionar Archivo</label>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row form-group">
                             <label for="" class="col-2">Rol:</label>
-                            <select name="rol" class="form-control col-md-9" >
-                                <option value="">--Seleccione--</option>
+                            <select name="rol" class="form-control col-md-9 text-center" >
+                                <option value="">--Elegir Rol--</option>
                                 @foreach( $rol as $roles)
                                     <option value="{{$roles->id_rol}}"> {{$roles->descripcion}}  </option>
                                 @endforeach

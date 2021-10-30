@@ -6,7 +6,7 @@
             <div class="col-md-10">
                 <h2 class="text-center mb-5"> Usuarios Administradores</h2>
 
-                
+
 
             <!---Mensaje flash -->
                 @if(session("usuarioEliminado"))
@@ -20,6 +20,7 @@
                     <tr>
                         <th>Nombre:</th>
                         <th>Email:</th>
+                        <th>Fotografía:</th>
                         <th>Rol:</th>
                         <th>Acciones</th>
                     </tr>
@@ -31,6 +32,7 @@
                     <tr>
                         <td>{{$user->nombre}}</td>
                         <td>{{$user->email}}</td>
+                        <td> <img src="{{ asset('storage').'/'.$user->foto}}" alt="" height="100"></td>
                         <td>{{$user->descripcion}}</td>
 
                         <td>
@@ -60,8 +62,6 @@
 
     </div>
 @endsection
-
-
 
 
 

@@ -6,6 +6,7 @@ use App\Models\Rol;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class UserController extends Controller
@@ -36,11 +37,20 @@ class UserController extends Controller
         $validator = $this->validate($request, [
             'nombre'=> 'required|string|max:100',
             'email'=> 'required|string|max:100|email|unique:usuarios',
+            'foto' => 'required',
             'rol'=> 'required'
         ]);
+        //guardar foto
+        if($request->hasFile('foto')){
+            $validator['foto'] = $request-> file('foto')->store('imagen','public');
+        }
+
+
+        //almacenan datos en la base de datos
         Usuario::create([
             'nombre'=>$validator['nombre'],
             'email'=>$validator['email'],
+            'foto'=>$validator['foto'],
             'rol_id'=>$validator['rol']
         ]);
 
@@ -69,6 +79,13 @@ class UserController extends Controller
     {
 
         $dataUsuario = request()->except ((['_token','_method']));
+        //datos de la foto eliminar y actualiza
+        if($request->hasFile('foto')){
+            $usuario = Usuario::findOrFail($id);
+            Storage::delete('public/'.$usuario->foto);
+            $dataUsuario ['foto'] = $request-> file('foto')->store('imagen','public');
+        }
+
         Usuario::where('id', '=', $id)->update($dataUsuario);
 
         return back()->with('usuarioModificado', 'Usuario Modificado');

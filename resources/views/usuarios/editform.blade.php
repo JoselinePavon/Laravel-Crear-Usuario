@@ -25,8 +25,9 @@
 
         <!-- Formulario de registro de usuario -->
             <div class="card">
-                <form action="{{route('edit',$usuario->id)}}" method="POST">
-                    @csrf @method('PATCH')
+                <form action="{{route('edit',$usuario->id)}}" method="POST"  enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    {{method_field('PATCH')}}
 
                     <div class="card-header text-center">MODIFICAR USUARIO</div>
 
@@ -42,9 +43,21 @@
                         </div>
 
                         <div class="row form-group">
+                            <label for="" class="col-2">Foto:</label>
+                            <div class="custom-file col-6">
+                                <img src="{{ asset('storage').'/'.$usuario->foto}}" alt="" height="100" width="auto">
+                                <input type="file" name="foto" class="custom-file-input" id="customFileLang" lang="es">
+                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row form-group">
                             <label for="" class="col-2">Rol:</label>
-                            <select name="rol_id" class="form-control col-md-9" >
-                                <option value="">--Seleccione--</option>
+                            <select name="rol_id" class="form-control col-md-9 text-center" >
+                                <option value="">--Cambiar Rol--</option>
                                 @foreach( $rol as $roles)
                                     <option value="{{$roles->id_rol}}"> {{$roles->descripcion}}  </option>
                                 @endforeach
