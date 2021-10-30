@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h2 class="text-center mb-5"> Usuarios Administradores</h2>
+                <h2 class="text-center mb-5" style="color: lightgreen"> Usuarios Registrados</h2>
 
 
 
@@ -15,9 +15,9 @@
                     </div>
                 @endif
 
-                <table class="table table-bordered table-striped text-center">
-                    <thead>
-                    <tr>
+                <table class="table table-bordered table-striped text-center" >
+                    <thead style="background-color:lightgreen">
+                    <tr style="color: white">
                         <th>Nombre:</th>
                         <th>Email:</th>
                         <th>Fotografía:</th>

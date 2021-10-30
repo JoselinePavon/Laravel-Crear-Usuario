@@ -26,10 +26,10 @@
 
                         <!-- Formulario de registro de usuario -->
             <div class="card">
-                <form action="{{url('/save')}}" method="POST"  enctype="multipart/form-data">
+                <form action="{{url('/save')}}" method="POST"  enctype="multipart/form-data" style="background-color: azure">
                 {{csrf_field()}}
 
-                    <div class="card-header text-center">AGREGAR USUARIO</div>
+                    <div class="card-header text-center" style="color: lightseagreen">AGREGAR USUARIO</div>
 
                     <div class="card-body">
                         <div class="row form-group">
@@ -46,7 +46,7 @@
                             <label for="" class="col-2">Foto:</label>
                             <div class="custom-file col-9">
                                 <input type="file" name="foto" class="custom-file-input" id="customFileLang" lang="es">
-                                <label class="custom-file-label text-center" for="customFileLang">Seleccionar Archivo</label>
+                                <label class="custom-file-label text-center" style="color: lightgreen" for="customFileLang">Seleccionar Archivo</label>
 
                             </div>
 
@@ -55,7 +55,7 @@
 
                         <div class="row form-group">
                             <label for="" class="col-2">Rol:</label>
-                            <select name="rol" class="form-control col-md-9 text-center" >
+                            <select name="rol" class="form-control col-md-9 text-center"style="color:lightgreen" >
                                 <option value="">--Elegir Rol--</option>
                                 @foreach( $rol as $roles)
                                     <option value="{{$roles->id_rol}}"> {{$roles->descripcion}}  </option>
@@ -65,7 +65,7 @@
 
 
                         <div class="row form-group">
-                            <button type="submit" class="btn btn-success col-md-9 offset-2">Guardar Usuario</button>
+                            <button type="submit" class=" col-md-9 offset-2 btn btn-outline-info"  >Guardar Usuario</button>
 
                         </div>
 
@@ -81,7 +81,7 @@
 
     </div>
 
-    <a class="btn btn-light btn-xs mt-5" href="{{ url('/') }}">&laquo volver</a>
+
 
     </div>
 @endsection

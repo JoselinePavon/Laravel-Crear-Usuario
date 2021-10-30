@@ -25,11 +25,11 @@
 
         <!-- Formulario de registro de usuario -->
             <div class="card">
-                <form action="{{route('edit',$usuario->id)}}" method="POST"  enctype="multipart/form-data">
+                <form action="{{route('edit',$usuario->id)}}" method="POST"  enctype="multipart/form-data" style="background-color: azure">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
 
-                    <div class="card-header text-center">MODIFICAR USUARIO</div>
+                    <div class="card-header text-center"style="color: lightseagreen">MODIFICAR USUARIO</div>
 
                     <div class="card-body">
                         <div class="row form-group">
@@ -44,10 +44,12 @@
 
                         <div class="row form-group">
                             <label for="" class="col-2">Foto:</label>
-                            <div class="custom-file col-6">
-                                <img src="{{ asset('storage').'/'.$usuario->foto}}" alt="" height="100" width="auto">
+                            <img src="{{ asset('storage').'/'.$usuario->foto}}" alt="" height="100" width="auto">
+
+                            <div class="custom-file col-7">
+
                                 <input type="file" name="foto" class="custom-file-input" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                <label class="custom-file-label" style="color:lightgreen" for="customFileLang">Seleccionar Archivo</label>
 
                             </div>
 
@@ -56,7 +58,7 @@
 
                         <div class="row form-group">
                             <label for="" class="col-2">Rol:</label>
-                            <select name="rol_id" class="form-control col-md-9 text-center" >
+                            <select name="rol_id" class="form-control col-md-9 text-center"style="color:lightgreen" >
                                 <option value="">--Cambiar Rol--</option>
                                 @foreach( $rol as $roles)
                                     <option value="{{$roles->id_rol}}"> {{$roles->descripcion}}  </option>
@@ -65,7 +67,7 @@
                         </div>
 
                         <div class="row form-group">
-                            <button type="submit" class="btn btn-success col-md-9 offset-2">Modificar Usuario</button>
+                            <button type="submit" class=" col-md-9 offset-2  btn btn-outline-info">Modificar Usuario</button>
 
                         </div>
 
@@ -78,7 +80,7 @@
 
     </div>
 
-    <a class="btn btn-light btn-xs mt-5" href="{{ url('/') }}">&laquo volver</a>
+    <a class="btn btn-light btn-xs mt-5" href="{{ url('/') }}">&laquo Página Anterior</a>
 
 </div>
 
