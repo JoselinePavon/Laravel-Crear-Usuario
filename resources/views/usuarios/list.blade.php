@@ -9,12 +9,18 @@
 
 
             <!---Mensaje flash -->
-                @if(session("usuarioEliminado"))
+                @if(Session::has('Alerta'))
                     <div class="alert alert-success">
-                        {{ session("usuarioEliminado")}}
+                        {{Session::get('Alerta')}}
                     </div>
+
                 @endif
 
+                @if(Session::has('Delete'))
+                    <div class="alert alert-danger">
+                        {{Session::get('Delete')}}
+                    </div>
+                @endif
                 <table class="table table-bordered table-striped text-center" >
                     <thead style="background-color:lightgreen">
                     <tr style="color: white">
@@ -45,7 +51,8 @@
                             <!--BOTON ELIMINAR-->
                             <form action="{{route('delete',$user-> id)}}" method="POST">
                                     @csrf @method('DELETE')
-                                <button type="submit" onclick="return confirm('Seguro que desea eliminar');" class="btn btn-danger">
+                                <button type="submit" onclick="return confirm('¿Seguro que desea eliminar?');" class="btn btn-danger">
+
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
 
@@ -62,8 +69,6 @@
 
     </div>
 @endsection
-
-
 
 
 

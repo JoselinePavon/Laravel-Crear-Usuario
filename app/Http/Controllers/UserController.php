@@ -54,7 +54,7 @@ class UserController extends Controller
             'rol_id'=>$validator['rol']
         ]);
 
-        return back()->with('usuarioGuardado','Usuario Guardado');
+        return redirect('/')->with('Alerta', '¡Se guardo el usuario!');
     }
 
         //eliminar usuarios
@@ -62,7 +62,7 @@ class UserController extends Controller
         function delete($id)
         {
             Usuario::destroy($id);
-            return back()->with('usuarioEliminado', 'Usuario Eliminado');
+            return back()->with('Delete', '¡Usuario Eliminado!');
         }
 
 
